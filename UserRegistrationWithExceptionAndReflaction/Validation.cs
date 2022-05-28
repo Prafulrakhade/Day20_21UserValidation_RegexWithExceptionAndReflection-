@@ -69,5 +69,35 @@ namespace UserRegistrationWithExceptionAndReflaction
                 return ex.Message;
             }
         }
+        public string EmailValidation(string email) // Creating a method for email name validation
+        {
+            try
+            {
+                string pattern = "^[0-9a-zA-Z]+[./+_-]{0,1}[0-9a-zA-Z]+[@][a-zA-Z0-9-]+[.][a-zA-Z]{2,}([.][a-zA-Z]{2,}){0,1}$"; // Regex for email validation
+                if (email == null)
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.NULL_INPUT, "Input should not be null"); //throwing exception when email is null
+                }
+                if (email.Equals(string.Empty))
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.EMPTY_INPUT, "Input should not be empty"); //throwing exception when email is empty
+                }
+                if (Regex.IsMatch(email, pattern)) //If name entered by user is match with regex then it is valid otherwise not
+                {
+                    Console.WriteLine($"\nYour first name \"{email}\" is valid");
+                    return "Input is valid";
+                }
+                else
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.EMPTY_INPUT, "Input is not valid");//throwing exception when email is not valid
+                }
+
+            }
+            catch (InvalidException ex) // If any exception throws then print exception message
+            {
+                Console.WriteLine("\n" + ex.Message);
+                return ex.Message;
+            }
+        }
     }
 }

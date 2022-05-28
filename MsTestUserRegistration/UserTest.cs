@@ -57,5 +57,28 @@ namespace MsTestUserRegistration
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+
+        [TestMethod]
+        //Checking for multiple email samples
+        [DataRow("abc123@.com", "Input is not valid")]
+        [DataRow("abc@abc@gmail.com", "Input is not valid")]
+        [DataRow("abc+100@gmail.com", "Input is valid")]
+        [DataRow("abc@1.com", "Input is valid")]
+        [DataRow("", "Input should not be empty")]
+        [DataRow(null, "Input should not be null")]
+        public void GivenEmailValidation(string email, string expected) // Testing for Lastname Validation
+        {
+            try
+            {
+                //Act
+                string actual = validation.EmailValidation(email);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (InvalidException ex) // catch exception if input is not valid or null or empty
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }

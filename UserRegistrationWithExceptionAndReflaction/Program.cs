@@ -21,6 +21,15 @@ namespace UserRegistrationWithExceptionAndReflaction
             string checkFirstName = validation.FirstNameValidation(fName); //Calling method to check first name is valid or not with argument
             if(checkFirstName != "Input is valid")//If not valid then ask user to enter first name again
                 goto Firstname;
+
+            // User Last name validation
+            Lastname:
+            Console.WriteLine("\nNote : Your Last name should start with Capital Letter only and has minimum 3 Character and no space between letters");
+            Console.WriteLine("\n\nEnter your last name : ");
+            string lName = Console.ReadLine(); //storing last name entered by user in variable
+            string checkLastName = validation.LastNameValidation(lName); //Calling method to check last name is valid or not with argument
+            if (checkLastName == "Input is valid")//If not valid then ask user to enter last name again
+                goto Lastname;
         }
     }
 }

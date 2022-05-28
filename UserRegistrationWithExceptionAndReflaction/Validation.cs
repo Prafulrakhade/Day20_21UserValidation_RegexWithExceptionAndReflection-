@@ -99,5 +99,35 @@ namespace UserRegistrationWithExceptionAndReflaction
                 return ex.Message;
             }
         }
+        public string MobileNumberValidation(string mobileNumber) // Creating a method for mobile number validation
+        {
+            try
+            {
+                string pattern = "^[9][1][ ][6-9][0-9]{9}$"; // Regex for mobile number validation
+                if (mobileNumber == null)
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.NULL_INPUT, "Input should not be null"); //throwing exception when mobile number is null
+                }
+                if (mobileNumber.Equals(string.Empty))
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.EMPTY_INPUT, "Input should not be empty"); //throwing exception when mobile number is empty
+                }
+                if (Regex.IsMatch(mobileNumber, pattern)) //If mobile number entered by user is match with regex then it is valid otherwise not
+                {
+                    Console.WriteLine($"\nYour email address \"{mobileNumber}\" is valid");
+                    return "Input is valid";
+                }
+                else
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.EMPTY_INPUT, "Input is not valid");//throwing exception when mobile number is not valid
+                }
+
+            }
+            catch (InvalidException ex) // If any exception throws then print exception message
+            {
+                Console.WriteLine("\n" + ex.Message);
+                return ex.Message;
+            }
+        }
     }
 }

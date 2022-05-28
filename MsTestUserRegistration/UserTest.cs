@@ -198,5 +198,44 @@ namespace MsTestUserRegistration
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+
+        [TestMethod]
+        //Checking for multiple email samples that are valid
+        [DataRow("abc@gmail.com", "Input is valid")]
+        [DataRow("abc-100@yahoo.com", "Input is valid")]
+        [DataRow("abc.100@yahoo.com", "Input is valid")]
+        [DataRow("abc@1.com", "Input is valid")]
+        [DataRow("abc111@yahoo.com.au", "Input is valid")]
+        [DataRow("abc-100@yahoo.com.au", "Input is valid")]
+        [DataRow("abc@gmail.com.com", "Input is valid")]
+        [DataRow("abc+100@yahoo.com", "Input is valid")]
+        //Checking for multiple email samples that are Invalid
+        [DataRow("abc", "Input is not valid")]
+        [DataRow("abc@.com.my", "Input is not valid")]
+        [DataRow("abc123@gmail.a", "Input is not valid")]
+        [DataRow("abc123@.com", "Input is not valid")]
+        [DataRow("abc@.com.com", "Input is not valid")]
+        [DataRow(".abc@abc.com", "Input is not valid")]
+        [DataRow("abc()*@gmail.com", "Input is not valid")]
+        [DataRow("abc@%*.com", "Input is not valid")]
+        [DataRow("abc..2002@gmail.com", "Input is not valid")]
+        [DataRow("abc.@gmail.com", "Input is not valid")]
+        [DataRow("abc@abc@gmail.com", "Input is not valid")]
+        [DataRow("abc@gmail.com.1a", "Input is not valid")]
+        [DataRow("abc@gmail.com.aa.au", "Input is not valid")]
+        public void GivenEmailSamplesValidation(string email, string expected) // Testing for email samples Validation
+        {
+            try
+            {
+                //Act
+                string actual = validation.EmailValidation(email);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (InvalidException ex) // catch exception if input is not valid or null or empty
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }

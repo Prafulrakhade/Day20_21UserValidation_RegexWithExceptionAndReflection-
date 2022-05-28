@@ -57,7 +57,17 @@ namespace UserRegistrationWithExceptionAndReflaction
             string checkPassword = validation.PasswordRule1Validation(password); //Calling method to check password follows all the rules or not with argument
             if (checkPassword != "Input is valid")//If not follow then ask user to enter password again
                 goto Password;
-            Console.ReadLine();
+
+            //user Password validation
+            Password2:
+            Console.WriteLine("\nPassword Rules");
+            Console.WriteLine("Rule 1 : Minimum 8 Character");
+            Console.WriteLine("Rule 2 : Atleast one Uppercase letter");
+            Console.WriteLine("\n\nEnter your Password : ");
+            string password2 = Console.ReadLine(); //storing password entered by user in variable
+            string checkPassword2 = validation.PasswordRule2Validation(password); //Calling method to check password follows all the rules or not with argument
+            if (checkPassword2 != "Input is valid")//If not follow then ask user to enter password again
+                goto Password2;
         }
     }
 }

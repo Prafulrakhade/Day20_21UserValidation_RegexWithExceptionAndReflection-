@@ -172,5 +172,31 @@ namespace MsTestUserRegistration
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+
+        [TestMethod]
+        //Checking for multiple password samples
+        [DataRow("dfgDnjvbn", "Input is not valid")]
+        [DataRow("A5sdf@df", "Input is valid")]
+        [DataRow("F5G@f", "Input is not valid")]
+        [DataRow("85ADcv*gj5", "Input is valid")]
+        [DataRow("*&&dfgADDd845", "Input is not valid")]
+        [DataRow("885@dfvvvb", "Input is not valid")]
+        [DataRow("AAaa#8ghbb", "Input is valid")]
+        [DataRow("", "Input should not be empty")]
+        [DataRow(null, "Input should not be null")]
+        public void GivenPasswordRule4Validation(string password, string expected) // Testing for password rule 4 along with all Validation
+        {
+            try
+            {
+                //Act
+                string actual = validation.PasswordRule4Validation(password);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (InvalidException ex) // catch exception if input is not valid or null or empty
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }

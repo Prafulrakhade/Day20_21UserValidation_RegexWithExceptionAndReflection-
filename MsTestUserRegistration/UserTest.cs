@@ -80,5 +80,28 @@ namespace MsTestUserRegistration
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+
+        [TestMethod]
+        //Checking for multiple mobile numbers
+        [DataRow("91 9652545874", "Input is valid")]
+        [DataRow("919652545874", "Input is not valid")]
+        [DataRow("9144 9652545874", "Input is not valid")]
+        [DataRow("91 1652545874", "Input is not valid")]
+        [DataRow("", "Input should not be empty")]
+        [DataRow(null, "Input should not be null")]
+        public void GivenMobileNumberValidation(string mobileNumber, string expected) // Testing for mobile number Validation
+        {
+            try
+            {
+                //Act
+                string actual = validation.MobileNumberValidation(mobileNumber);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (InvalidException ex) // catch exception if input is not valid or null or empty
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }

@@ -189,5 +189,35 @@ namespace UserRegistrationWithExceptionAndReflaction
                 return ex.Message;
             }
         }
+        public string PasswordRule3Validation(string password) // Creating a method for password rule 3 validation
+        {
+            try
+            {
+                string patternForRule3 = "^(?=.*[A-Z])(?=.*[0-9])[0-9a-zA-Z@#$%^&*!+=]{8,}$"; // Regex for password rule 3 validation
+                if (password == null)
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.NULL_INPUT, "Input should not be null"); //throwing exception when password is null
+                }
+                if (password.Equals(string.Empty))
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.EMPTY_INPUT, "Input should not be empty"); //throwing exception when password is empty
+                }
+                if (Regex.IsMatch(password, patternForRule3)) //If paasword entered by user is match with regex then it is valid otherwise not
+                {
+                    Console.WriteLine($"\nYour password \"{password}\" is valid");
+                    return "Input is valid";
+                }
+                else
+                {
+                    throw new InvalidException(InvalidException.ExceptionType.EMPTY_INPUT, "Input is not valid");//throwing exception when password is not valid
+                }
+
+            }
+            catch (InvalidException ex) // If any exception throws then print exception message
+            {
+                Console.WriteLine("\n" + ex.Message);
+                return ex.Message;
+            }
+        }
     }
 }
